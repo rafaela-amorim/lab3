@@ -3,9 +3,10 @@ package lab3;
 public class Agenda {
 	// ***************** Atributos ****************
 
+	// remover documentação dos atributos
 	/**
-	 * listaDeContatos - Array que irá armazenar os contatos cadastrados.
-	 * MAX			   - Int com o tamanho máximo que o array de contatos pode ter.
+	 * listaDeContatos - Array que irá armazenar os contatos cadastrados. MAX - Int
+	 * com o tamanho máximo que o array de contatos pode ter.
 	 */
 	private Contato[] listaDeContatos;
 
@@ -34,17 +35,18 @@ public class Agenda {
 	 *            Sobrenome do contato
 	 * @param numero
 	 *            Número de telefone do contato.
-	 *            
+	 * 
 	 * @return Retorna um booleano que será true, caso a posição seja válida, e
 	 *         false caso contrário.
 	 */
-	public boolean cadastrarContato(int posicao, String nome, String sobrenome, String numero) {
-
-		if (posicao < 101 && posicao > 0) {
-			listaDeContatos[posicao] = new Contato(nome, sobrenome, numero);
-			return true;
+	public void cadastrarContato(int posicao, String nome, String sobrenome, String numero) throws IllegalArgumentException{
+		
+		// TRATAR ESSA PORRA AQUI
+		if (posicao > 101 || posicao < 0) {
+			IllegalArgumentException erro = new IllegalArgumentException();
+			throw erro;
 		} else {
-			return false;
+			listaDeContatos[posicao] = new Contato(nome, sobrenome, numero);
 		}
 	}
 
@@ -57,7 +59,11 @@ public class Agenda {
 	 * @return String com as informações do contato especificado.
 	 */
 	public String exibirContato(int posicao) {
-		return listaDeContatos[posicao].toString();
+		if (posicao > 101 || posicao < 0) {
+			throw new IllegalArgumentException();
+		} else {
+			return listaDeContatos[posicao].toString();
+		}
 	}
 
 	/**
@@ -65,7 +71,8 @@ public class Agenda {
 	 * contato armazenado e concatena na String de retorno, listagemContatos, a sua
 	 * posição, nome e sobrenome.
 	 * 
-	 * @return String com os contatos armazenados no array e suas respectivas posições.
+	 * @return String com os contatos armazenados no array e suas respectivas
+	 *         posições.
 	 */
 	public String listarContatos() {
 		String listagemContatos = "";

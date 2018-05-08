@@ -3,6 +3,7 @@ package lab3;
 public class Contato {
 	// ***************** Atributos ****************
 	
+	// remover documentação dos atributos
 	/**
 	 * nome			- String que armazena o primeiro nome do contato.
 	 * sobrenome	- String que armazena o sobrenome do contato.
@@ -32,6 +33,16 @@ public class Contato {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		numTelefone = numero;
+		
+		if (nome.equals("") || nome.trim().length() == 0){
+			throw new IllegalArgumentException();
+			
+		} else if (sobrenome.equals("") || sobrenome.trim().length() == 0) {
+			throw new IllegalArgumentException();
+			
+		} else if (numero.equals("") || numero.trim().length() == 0) {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	// **************** Métodos *********************
