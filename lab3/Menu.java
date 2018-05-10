@@ -3,9 +3,10 @@ package lab3;
 import java.util.Scanner;
 
 public class Menu {
-
+	
+	private static Scanner input = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
 		
 		boolean keepGoing = true;
 		
@@ -33,8 +34,8 @@ public class Menu {
 			action = input.next().toUpperCase().charAt(0);
 			
 			switch (action) {
+				
 				case 'C':
-					
 					System.out.println("Posição: ");
 					posicao = input.nextInt();
 					input.nextLine();
@@ -48,11 +49,12 @@ public class Menu {
 					System.out.println("Telefone: ");
 					telefone = input.nextLine();
 					
-					agenda.cadastrarContato(posicao, nome, sobrenome, telefone);
-		
-					System.err.println("POSIÇÃO INVÁLIDA!");
+					if (agenda.cadastrarContato(posicao, nome, sobrenome, telefone)) {
+						System.out.println("CADASTRO REALIZADO!\n" + "\n" + "");
+					} else {
+						System.out.println("POSIÇÃO INVÁLIDA!");
+					}
 					
-					System.out.println("CADASTRO REALIZADO!\n" + "\n" + "");
 					break;
 					
 				case 'S':
@@ -63,8 +65,15 @@ public class Menu {
 					System.out.println("Contato> ");
 					posicao = input.nextInt();
 					input.nextLine();
-					agenda.exibirContato(posicao);
+					System.out.println(agenda.exibirContato(posicao));
 					break;
+				
+				case 'L':
+					System.out.println(agenda.listarContatos());
+					break;
+				
+				default:
+					System.out.println("OPÇÃO INVÁLIDA!");
 			}
 		}
 

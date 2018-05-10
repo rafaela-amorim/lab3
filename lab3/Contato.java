@@ -2,47 +2,52 @@ package lab3;
 
 public class Contato {
 	// ***************** Atributos ****************
-	
-	// remover documentação dos atributos
-	/**
-	 * nome			- String que armazena o primeiro nome do contato.
-	 * sobrenome	- String que armazena o sobrenome do contato.
-	 * numTelefone 	- String que armazena o número de telefone do contato.
-	 */
+
 	private String nome;
 
 	private String sobrenome;
 
-	private String numTelefone;
+	private Telephone[] numTelefone;
+	
+	private final int QTT_TELEFONES = 3;
+	
+	private int indexTel;
+	
+	private String amizade;
 
 	// **************** Construtores **********************
 
-	/**
+	/*
 	 * Contrói um contato recebendo uma String que será o nome, outra para o
 	 * sobrenome e uma String que recebe um número que será o número de telefone do
 	 * contato.
-	 * 
-	 * @param nome
-	 *            Nome do contato
-	 * @param sobrenome
-	 *            Sobrenome do contato
-	 * @param numero
-	 *            Número de telefone do contato
 	 */
-	public Contato(String nome, String sobrenome, String numero) {
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		numTelefone = numero;
+	public Contato(String nome, String sobrenome, String amizade, String ddd, String codePais, String numero, String tipoTel) {
+		numTelefone = new Telephone[QTT_TELEFONES];
 		
-		if (nome.equals("") || nome.trim().length() == 0){
+		if (nome == null || sobrenome == null) {
+			throw new NullPointerException();
+		
+		} else if (nome.trim().length() == 0) {
+			throw new IllegalArgumentException();
+		
+		} else if (sobrenome.trim().length() == 0) {
 			throw new IllegalArgumentException();
 			
-		} else if (sobrenome.equals("") || sobrenome.trim().length() == 0) {
-			throw new IllegalArgumentException();
-			
-		} else if (numero.equals("") || numero.trim().length() == 0) {
-			throw new IllegalArgumentException();
+		} else {
+			this.nome = nome;
+			this.sobrenome = sobrenome;
+			this.amizade = amizade;
 		}
+		
+		indexTel = 1;
+		
+		for (int i = 1; i < QTT_TELEFONES; i++) {
+			if (i == indexTel) {
+				numTelefone[indexTel] = new Telephone(ddd, numero, codePais, tipoTel);
+			} 
+		}
+		
 	}
 
 	// **************** Métodos *********************
@@ -55,7 +60,7 @@ public class Contato {
 	 */
 	@Override
 	public String toString() {
-		return nome + " " + sobrenome + " - " + numTelefone;
+		return nome + " " + sobrenome + " - ";
 	}
 
 	/**
